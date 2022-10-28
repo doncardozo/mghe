@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: mysql:8.0.31
+    restart: always
+    hostname: basededatos    
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_HOST: 172.26.0.2      
+    volumes:
+      - ./data:/var/lib/mysql
+    networks:
+      tonynet:
+        ipv4_address: 172.26.0.3
+
+  my-app:
+    container_name: my-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '8080:8080'
+    command: npm run dev
+    networks:
+      - tonynet   
+
+networks:
+  tonynet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.26.0.0/16    

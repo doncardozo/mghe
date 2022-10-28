@@ -1,0 +1,32 @@
+GET http://0.0.0.0:8080
+
+###
+
+GET http://0.0.0.0:8080/posts
+
+###
+
+GET http://0.0.0.0:8080/posts/1
+
+###
+
+POST http://0.0.0.0:8080/posts
+Content-Type: application/json
+
+{
+    "title": "Soy un post nuevo",
+    "author": "Cardozo",
+    "content": "Hola, soy un contenido"
+}
+
+###
+
+PUT http://0.0.0.0:8080/posts/2
+Content-Type: application/json
+
+{
+    "title": "Esto es un titulo",
+    "author": "Antonio",
+    "content": "Hola, soy un contenido"
+}
+
